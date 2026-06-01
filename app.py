@@ -1,8 +1,23 @@
 from flask import Flask, render_template, request
+from dotenv import load_dotenv
+from PyPDF2 import PdfReader
+import google.generativeai as genai
 import os
 
+# Load environment variables
+load_dotenv()
+
+# Configure Gemini
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+
+
+# Create Gemini model
+model = genai.GenerativeModel("gemini-2.5-flash")
+
+# Create Flask app
 app = Flask(__name__)
 
+# Upload folder configuration
 UPLOAD_FOLDER = "uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
@@ -15,12 +30,11 @@ def home():
 @app.route("/upload", methods=["POST"])
 def upload_file():
 
-    from PyPDF2 import PdfReader
-
     file = request.files["pdf"]
 
     if file:
 
+        # Save uploaded PDF
         filepath = os.path.join(
             app.config["UPLOAD_FOLDER"],
             file.filename
@@ -28,17 +42,39 @@ def upload_file():
 
         file.save(filepath)
 
+        # Read PDF
         reader = PdfReader(filepath)
 
         text = ""
 
         for page in reader.pages:
-            text += page.extract_text() + "\n"
+            page_text = page.extract_text()
+
+            if page_text:
+                text += page_text + "\n"
+
+        # Gemini Prompt
+        prompt = f"""
+Create 10 study flashcards from these notes.
+
+Format exactly like this:
+
+Q: Question
+A: Answer
+
+Q: Question
+A: Answer
+
+Notes:
+{text[:10000]}
+"""
+
+        # Generate flashcards
+        response = model.generate_content(prompt)
 
         return f"""
-        <h2>PDF Uploaded Successfully</h2>
-        <h3>Extracted Text:</h3>
-        <pre>{text[:5000]}</pre>
+        <h1>Generated Flashcards</h1>
+        <pre>{response.text}</pre>
         """
 
     return "No file uploaded"

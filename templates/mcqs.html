@@ -2,15 +2,30 @@
 <html>
 <head>
     <title>Generated MCQs</title>
+
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<h1>📝 Generated MCQs</h1>
+<div class="container">
 
-<div class="card">
-    <pre>{{ mcqs }}</pre>
+    <h1>📝 Generated MCQs</h1>
+
+    <div class="card">
+
+        <pre>{{ mcqs }}</pre>
+
+    </div>
+
+    <br>
+
+    <a href="/">
+        <button>
+            Generate More Questions
+        </button>
+    </a>
+
 </div>
 
 </body>

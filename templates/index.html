@@ -2,25 +2,37 @@
 <html>
 <head>
     <title>AI Flashcard Generator</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>📚 AI Flashcard Generator</h1>
+    <h1>📚 AI Flashcard Generator</h1>
 
-        <p>
-            Upload your notes and generate AI-powered flashcards.
-        </p>
+    <p>
+        Upload your notes and generate AI-powered flashcards.
+    </p>
 
-        <input type="file">
+    <form action="/upload"
+          method="POST"
+          enctype="multipart/form-data">
+
+        <input type="file"
+               name="pdf"
+               accept=".pdf"
+               required>
 
         <br><br>
 
-        <button>Generate Flashcards</button>
+        <button type="submit">
+            Generate Flashcards
+        </button>
 
-    </div>
+    </form>
+
+</div>
 
 </body>
 </html>

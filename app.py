@@ -10,7 +10,6 @@ load_dotenv()
 # Configure Gemini
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-
 # Create Gemini model
 model = genai.GenerativeModel("gemini-2.5-flash")
 
@@ -72,10 +71,25 @@ Notes:
         # Generate flashcards
         response = model.generate_content(prompt)
 
-        return f"""
-        <h1>Generated Flashcards</h1>
-        <pre>{response.text}</pre>
-        """
+        cards = []
+
+        parts = response.text.split("Q:")
+
+        for part in parts[1:]:
+
+            if "A:" in part:
+
+                question, answer = part.split("A:", 1)
+
+                cards.append({
+                    "question": question.strip(),
+                    "answer": answer.strip()
+                })
+
+        return render_template(
+            "flashcards.html",
+            cards=cards
+        )
 
     return "No file uploaded"
 

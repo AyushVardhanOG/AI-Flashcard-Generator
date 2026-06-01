@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Flashcards</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>📚 Generated Flashcards</h1>
+
+{% for card in cards %}
+<div class="card">
+
+    <h3>{{ card.question }}</h3>
+
+    <details>
+        <summary>Show Answer</summary>
+        <p>{{ card.answer }}</p>
+    </details>
+
+</div>
+{% endfor %}
+
+</body>
+</html>

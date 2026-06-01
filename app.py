@@ -137,10 +137,24 @@ Notes:
         # MCQ Mode
         elif mode == "mcqs":
 
+            mcq_blocks = response.text.split("Q")
+
+            mcqs = []
+
+            for block in mcq_blocks:
+
+                block = block.strip()
+
+                if not block:
+                    continue
+
+                mcqs.append("Q" + block)
+
             return render_template(
-                "mcqs.html",
-                mcqs=response.text
+            "mcqs.html",
+            mcqs=mcqs
             )
+    
 
         # Quiz Mode
         else:

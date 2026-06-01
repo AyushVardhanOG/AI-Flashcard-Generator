@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AI Flashcard Generator</title>
+    <title>AI Study Assistant</title>
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -9,10 +9,10 @@
 
 <div class="container">
 
-    <h1>📚 AI Flashcard Generator</h1>
+    <h1>📚 AI Study Assistant</h1>
 
     <p>
-        Upload your notes and generate AI-powered flashcards.
+        Upload your notes and let AI generate Flashcards or MCQs.
     </p>
 
     <form action="/upload"
@@ -26,8 +26,27 @@
 
         <br><br>
 
-        <button type="submit">
+        <label>
+            <input type="radio"
+                   name="mode"
+                   value="flashcards"
+                   checked>
             Generate Flashcards
+        </label>
+
+        <br><br>
+
+        <label>
+            <input type="radio"
+                   name="mode"
+                   value="mcqs">
+            Generate MCQs
+        </label>
+
+        <br><br>
+
+        <button type="submit">
+            Generate
         </button>
 
     </form>

@@ -30,6 +30,7 @@ def home():
 def upload_file():
 
     file = request.files["pdf"]
+    mode = request.form["mode"]
 
     if file:
 
@@ -53,13 +54,12 @@ def upload_file():
                 text += page_text + "\n"
 
         # Gemini Prompt
-        prompt = f"""
+        if mode == "flashcards":
+
+            prompt = f"""
 Create 10 study flashcards from these notes.
 
-Format exactly like this:
-
-Q: Question
-A: Answer
+Format exactly like:
 
 Q: Question
 A: Answer
@@ -68,28 +68,57 @@ Notes:
 {text[:10000]}
 """
 
-        # Generate flashcards
+        else:
+
+            prompt = f"""
+Create 10 multiple choice questions from these notes.
+
+Format:
+
+Q1. Question
+
+A) Option
+B) Option
+C) Option
+D) Option
+
+Correct Answer: X
+
+Notes:
+{text[:10000]}
+"""
+
+        # Generate AI response
         response = model.generate_content(prompt)
 
-        cards = []
+        if mode == "flashcards":
 
-        parts = response.text.split("Q:")
+            cards = []
 
-        for part in parts[1:]:
+            parts = response.text.split("Q:")
 
-            if "A:" in part:
+            for part in parts[1:]:
 
-                question, answer = part.split("A:", 1)
+                if "A:" in part:
 
-                cards.append({
-                    "question": question.strip(),
-                    "answer": answer.strip()
-                })
+                    question, answer = part.split("A:", 1)
 
-        return render_template(
-            "flashcards.html",
-            cards=cards
-        )
+                    cards.append({
+                        "question": question.strip(),
+                        "answer": answer.strip()
+                    })
+
+            return render_template(
+                "flashcards.html",
+                cards=cards
+            )
+
+        else:
+
+            return render_template(
+                "mcqs.html",
+                mcqs=response.text
+            )
 
     return "No file uploaded"
 

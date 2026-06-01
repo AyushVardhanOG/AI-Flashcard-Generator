@@ -53,13 +53,13 @@ def upload_file():
             if page_text:
                 text += page_text + "\n"
 
-        # Gemini Prompt
+        # Generate prompt based on mode
         if mode == "flashcards":
 
             prompt = f"""
-Create 10 study flashcards from these notes.
+Create 10 study flashcards.
 
-Format exactly like:
+Format:
 
 Q: Question
 A: Answer
@@ -68,10 +68,30 @@ Notes:
 {text[:10000]}
 """
 
+        elif mode == "mcqs":
+
+            prompt = f"""
+Create 10 multiple choice questions.
+
+Format:
+
+Q1. Question
+
+A) Option
+B) Option
+C) Option
+D) Option
+
+Correct Answer: X
+
+Notes:
+{text[:10000]}
+"""
+
         else:
 
             prompt = f"""
-Create 10 multiple choice questions from these notes.
+Create 10 quiz questions.
 
 Format:
 
@@ -91,6 +111,7 @@ Notes:
         # Generate AI response
         response = model.generate_content(prompt)
 
+        # Flashcards Mode
         if mode == "flashcards":
 
             cards = []
@@ -113,11 +134,22 @@ Notes:
                 cards=cards
             )
 
-        else:
+        # MCQ Mode
+        elif mode == "mcqs":
 
             return render_template(
                 "mcqs.html",
                 mcqs=response.text
+            )
+
+        # Quiz Mode
+        else:
+
+            questions = response.text.split("\n\n")
+
+            return render_template(
+                "quiz.html",
+                questions=questions
             )
 
     return "No file uploaded"

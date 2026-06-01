@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Mode</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>📝 Quiz Mode</h1>
+
+<form>
+
+{% for question in questions %}
+
+<div class="card">
+
+    <pre>{{ question }}</pre>
+
+</div>
+
+{% endfor %}
+
+</form>
+
+</body>
+</html>

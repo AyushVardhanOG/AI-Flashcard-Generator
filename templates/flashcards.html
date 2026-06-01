@@ -2,13 +2,61 @@
 <html>
 <head>
     <title>AI Flashcards</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        body{
+            background:#0f172a;
+            color:white;
+            font-family:Arial, sans-serif;
+            padding:40px;
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:40px;
+        }
+
+        .card{
+            background:#1e293b;
+            padding:20px;
+            margin:20px auto;
+            border-radius:15px;
+            max-width:800px;
+            box-shadow:0 0 10px rgba(0,0,0,0.4);
+        }
+
+        h3{
+            color:#38bdf8;
+        }
+
+        details{
+            margin-top:15px;
+        }
+
+        summary{
+            cursor:pointer;
+            color:#4ade80;
+            font-weight:bold;
+        }
+
+        p{
+            margin-top:10px;
+            line-height:1.6;
+        }
+
+    </style>
+
 </head>
 <body>
 
 <h1>📚 Generated Flashcards</h1>
 
 {% for card in cards %}
+
 <div class="card">
 
     <h3>{{ card.question }}</h3>
@@ -19,6 +67,7 @@
     </details>
 
 </div>
+
 {% endfor %}
 
 </body>

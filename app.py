@@ -53,7 +53,10 @@ def upload_file():
             if page_text:
                 text += page_text + "\n"
 
-        # Generate prompt based on mode
+        # ==========================
+        # FLASHCARDS
+        # ==========================
+
         if mode == "flashcards":
 
             prompt = f"""
@@ -68,25 +71,42 @@ Notes:
 {text[:10000]}
 """
 
+        # ==========================
+        # MCQS
+        # ==========================
+
         elif mode == "mcqs":
 
             prompt = f"""
-Create 10 multiple choice questions.
+Create exactly 10 multiple choice questions.
 
-Format:
+Format EXACTLY like this:
 
-Q1. Question
+Q1. Question text
+A) Option A
+B) Option B
+C) Option C
+D) Option D
+Correct Answer: A
 
-A) Option
-B) Option
-C) Option
-D) Option
+Q2. Question text
+A) Option A
+B) Option B
+C) Option C
+D) Option D
+Correct Answer: B
 
-Correct Answer: X
+Do not add introductions.
+Do not add explanations.
+Only output questions.
 
 Notes:
 {text[:10000]}
 """
+
+        # ==========================
+        # QUIZ
+        # ==========================
 
         else:
 
@@ -111,7 +131,10 @@ Notes:
         # Generate AI response
         response = model.generate_content(prompt)
 
-        # Flashcards Mode
+        # ==========================
+        # FLASHCARDS PAGE
+        # ==========================
+
         if mode == "flashcards":
 
             cards = []
@@ -134,7 +157,10 @@ Notes:
                 cards=cards
             )
 
-        # MCQ Mode
+        # ==========================
+        # MCQ PAGE
+        # ==========================
+
         elif mode == "mcqs":
 
             mcq_blocks = response.text.split("Q")
@@ -148,15 +174,40 @@ Notes:
                 if not block:
                     continue
 
-                mcqs.append("Q" + block)
+                full_mcq = "Q" + block
+
+                lines = full_mcq.split("\n")
+
+                question_lines = []
+                answer = ""
+
+                for line in lines:
+
+                    if "Correct Answer:" in line:
+
+                        answer = line.replace(
+                            "Correct Answer:",
+                            ""
+                        ).strip()
+
+                    else:
+
+                        question_lines.append(line)
+
+                mcqs.append({
+                    "question": "\n".join(question_lines),
+                    "answer": answer
+                })
 
             return render_template(
-            "mcqs.html",
-            mcqs=mcqs
+                "mcqs.html",
+                mcqs=mcqs
             )
-    
 
-        # Quiz Mode
+        # ==========================
+        # QUIZ PAGE
+        # ==========================
+
         else:
 
             questions = response.text.split("\n\n")

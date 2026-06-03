@@ -13,18 +13,23 @@
     <h1>📝 MCQ Practice</h1>
 
     <p>
-        Practice the questions first, then reveal the answers.
+        Try solving first, then reveal the answer.
     </p>
 
     {% for mcq in mcqs %}
 
     <div class="card">
 
+        <pre>{{ mcq.question }}</pre>
+
         <details>
 
-            <summary>Show Question & Answer</summary>
+            <summary>Show Answer</summary>
 
-            <pre>{{ mcq }}</pre>
+            <p>
+                Correct Answer:
+                {{ mcq.answer }}
+            </p>
 
         </details>
 

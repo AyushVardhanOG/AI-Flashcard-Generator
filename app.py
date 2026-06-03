@@ -25,6 +25,8 @@ quiz_questions = []
 latest_results = []
 latest_score = 0
 
+latest_flashcards = []
+
 # Upload folder configuration
 UPLOAD_FOLDER = "uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
@@ -159,6 +161,7 @@ Notes:
     # ==========================
 
     if mode == "flashcards":
+        global latest_flashcards
 
         cards = []
 
@@ -174,6 +177,8 @@ Notes:
                     "question": question.strip(),
                     "answer": answer.strip()
                 })
+
+        latest_flashcards = cards
 
         return render_template(
             "flashcards.html",
@@ -384,6 +389,58 @@ def download_results():
         )
 
         y -= 30
+
+        if y < 100:
+
+            c.showPage()
+            y = 800
+
+    c.save()
+
+    return send_file(
+        pdf_file,
+        as_attachment=True
+    )
+
+@app.route("/download_flashcards")
+def download_flashcards():
+
+    pdf_file = "flashcards.pdf"
+
+    c = canvas.Canvas(pdf_file)
+
+    y = 800
+
+    c.setFont("Helvetica-Bold", 18)
+    c.drawString(
+        50,
+        y,
+        "AI Study Assistant - Flashcards"
+    )
+
+    y -= 50
+
+    for card in latest_flashcards:
+
+        c.setFont("Helvetica-Bold", 12)
+
+        c.drawString(
+            50,
+            y,
+            f"Question: {card['question'][:80]}"
+        )
+
+        y -= 25
+
+        c.setFont("Helvetica", 11)
+
+        c.drawString(
+            70,
+            y,
+            f"Answer: {card['answer'][:100]}"
+        )
+
+        y -= 40
 
         if y < 100:
 

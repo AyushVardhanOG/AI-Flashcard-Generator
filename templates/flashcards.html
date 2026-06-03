@@ -48,12 +48,36 @@
             line-height:1.6;
         }
 
+        .download-btn{
+            text-align:center;
+            margin-bottom:30px;
+        }
+
+        button{
+            background:#22c55e;
+            color:white;
+            border:none;
+            padding:12px 25px;
+            border-radius:10px;
+            cursor:pointer;
+        }
+
     </style>
 
 </head>
 <body>
 
 <h1>📚 Generated Flashcards</h1>
+
+<div class="download-btn">
+
+    <a href="/download_flashcards">
+        <button>
+            📄 Download Flashcards PDF
+        </button>
+    </a>
+
+</div>
 
 {% for card in cards %}
 

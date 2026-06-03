@@ -1,19 +1,31 @@
-# AI Flashcard Generator
+# AI Study Assistant
 
-Generate study flashcards automatically from PDF notes using Gemini AI.
+AI-powered study assistant that converts PDF notes into:
 
-## Features
-- Upload PDF notes
-- Extract text automatically
-- Generate AI-powered flashcards
-- Interactive flashcard UI
+- Flashcards
+- Multiple Choice Questions (MCQs)
+- Interactive Quizzes
+- Quiz Score Reports
+- PDF Exports
 
 ## Tech Stack
+
 - Python
 - Flask
-- Gemini AI
-- HTML
-- CSS
+- Google Gemini API
+- HTML/CSS
+- Render
 
-## Installation
-...
+## Features
+
+✔ PDF Upload
+✔ AI Flashcard Generation
+✔ AI MCQ Generation
+✔ Interactive Quiz
+✔ Quiz Scoring
+✔ Flashcard PDF Download
+✔ Quiz Report PDF Download
+
+## Live Demo
+
+https://ai-study-generator.onrender.com

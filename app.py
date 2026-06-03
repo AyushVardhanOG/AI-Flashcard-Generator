@@ -1,3 +1,5 @@
+from flask import send_file
+from reportlab.pdfgen import canvas
 from flask import Flask, render_template, request
 from dotenv import load_dotenv
 from PyPDF2 import PdfReader
@@ -19,6 +21,9 @@ app = Flask(__name__)
 # Store quiz data
 quiz_answers = []
 quiz_questions = []
+
+latest_results = []
+latest_score = 0
 
 # Upload folder configuration
 UPLOAD_FOLDER = "uploads"
@@ -285,6 +290,9 @@ Notes:
 @app.route("/submit_quiz", methods=["POST"])
 def submit_quiz():
 
+    global latest_results
+    global latest_score
+
     global quiz_answers
     global quiz_questions
 
@@ -312,11 +320,81 @@ def submit_quiz():
             "correct": is_correct
         })
 
+    latest_results = results
+    latest_score = score
+
     return render_template(
         "results.html",
         score=score,
         total=len(quiz_answers),
         results=results
+    )
+
+
+@app.route("/download_results")
+def download_results():
+
+    pdf_file = "quiz_results.pdf"
+
+    c = canvas.Canvas(pdf_file)
+
+    y = 800
+
+    c.setFont("Helvetica-Bold", 16)
+    c.drawString(
+        50,
+        y,
+        "AI Study Assistant - Quiz Report"
+    )
+
+    y -= 40
+
+    c.setFont("Helvetica", 12)
+
+    c.drawString(
+        50,
+        y,
+        f"Score: {latest_score}/{len(latest_results)}"
+    )
+
+    y -= 40
+
+    for result in latest_results:
+
+        c.drawString(
+            50,
+            y,
+            f"Question: {result['question'][:80]}"
+        )
+
+        y -= 20
+
+        c.drawString(
+            70,
+            y,
+            f"Your Answer: {result['user_answer']}"
+        )
+
+        y -= 20
+
+        c.drawString(
+            70,
+            y,
+            f"Correct Answer: {result['correct_answer']}"
+        )
+
+        y -= 30
+
+        if y < 100:
+
+            c.showPage()
+            y = 800
+
+    c.save()
+
+    return send_file(
+        pdf_file,
+        as_attachment=True
     )
 if __name__ == "__main__":
     app.run(debug=True)

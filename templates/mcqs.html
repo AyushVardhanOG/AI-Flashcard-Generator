@@ -1,44 +1,42 @@
 <!DOCTYPE html>
-
 <html>
 <head>
     <title>MCQ Practice</title>
 
-```
-<link rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}">
-```
-
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
 <div class="container">
 
-```
-<h1>📝 MCQ Practice</h1>
+    <h1>📝 MCQ Practice</h1>
 
-{% for mcq in mcqs %}
+    <p>
+        Practice the questions first, then reveal the answers.
+    </p>
 
-<div class="card">
+    {% for mcq in mcqs %}
 
-    <details>
+    <div class="card">
 
-        <summary>Show Question</summary>
+        <details>
 
-        <pre>{{ mcq }}</pre>
+            <summary>Show Question & Answer</summary>
 
-    </details>
+            <pre>{{ mcq }}</pre>
 
-</div>
+        </details>
 
-{% endfor %}
+    </div>
 
-<a href="/">
-    <button>
-        Generate More MCQs
-    </button>
-</a>
-```
+    {% endfor %}
+
+    <a href="/">
+        <button>
+            Generate More MCQs
+        </button>
+    </a>
 
 </div>
 

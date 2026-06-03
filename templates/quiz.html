@@ -2,26 +2,53 @@
 <html>
 <head>
     <title>Quiz Mode</title>
+
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<h1>📝 Quiz Mode</h1>
+<div class="container">
 
-<form>
+    <h1>📝 Quiz Mode</h1>
 
-{% for question in questions %}
+    <form action="/submit_quiz" method="POST">
 
-<div class="card">
+        {% for question in questions %}
 
-    <pre>{{ question }}</pre>
+        <div class="card">
+
+            <pre>{{ question.question }}</pre>
+
+            {% for option in question.options %}
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="q{{ question.question }}"
+                    value="{{ option[0] }}"
+                    required>
+
+                {{ option }}
+
+            </label>
+
+            <br><br>
+
+            {% endfor %}
+
+        </div>
+
+        {% endfor %}
+
+        <button type="submit">
+            Submit Quiz
+        </button>
+
+    </form>
 
 </div>
-
-{% endfor %}
-
-</form>
 
 </body>
 </html>

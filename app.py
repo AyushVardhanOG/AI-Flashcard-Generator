@@ -415,35 +415,54 @@ def download_flashcards():
     c.drawString(
         50,
         y,
-        "AI Study Assistant - Flashcards"
+        "AI Study Assistant - Flashcard Report"
     )
 
     y -= 50
 
     for card in latest_flashcards:
+        question = card["question"]
+        answer = card["answer"]
 
         c.setFont("Helvetica-Bold", 12)
 
-        c.drawString(
-            50,
-            y,
-            f"Question: {card['question'][:80]}"
-        )
+        question_lines = []
 
-        y -= 25
+        while len(question) > 80:
+            question_lines.append(question[:80])
+            question = question[80:]
+
+        question_lines.append(question)
+
+        for line in question_lines:
+            c.drawString(
+                50,
+                y,
+                line
+            )
+            y -= 20
 
         c.setFont("Helvetica", 11)
 
-        c.drawString(
-            70,
-            y,
-            f"Answer: {card['answer'][:100]}"
-        )
+        answer_lines = []
 
-        y -= 40
+        while len(answer) > 90:
+            answer_lines.append(answer[:90])
+            answer = answer[90:]
+
+        answer_lines.append(answer)
+
+        for line in answer_lines:
+            c.drawString(
+                70,
+                y,
+                line
+            )
+            y -= 18
+
+        y -= 20
 
         if y < 100:
-
             c.showPage()
             y = 800
 

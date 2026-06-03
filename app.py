@@ -5,6 +5,14 @@ from dotenv import load_dotenv
 from PyPDF2 import PdfReader
 import google.generativeai as genai
 import os
+from reportlab.platypus import (
+    SimpleDocTemplate,
+    Paragraph,
+    Spacer,
+    PageBreak
+)
+
+from reportlab.lib.styles import getSampleStyleSheet
 
 # Load environment variables
 load_dotenv()
@@ -26,6 +34,11 @@ latest_results = []
 latest_score = 0
 
 latest_flashcards = []
+latest_results = []
+latest_score = 0
+
+latest_flashcards = []
+latest_mcqs = []
 
 # Upload folder configuration
 UPLOAD_FOLDER = "uploads"
@@ -191,6 +204,8 @@ Notes:
 
     elif mode == "mcqs":
 
+        global latest_mcqs
+
         mcq_blocks = response.text.split("Q")
 
         mcqs = []
@@ -226,6 +241,8 @@ Notes:
                 "question": "\n".join(question_lines),
                 "answer": answer
             })
+
+        latest_mcqs = mcqs
 
         return render_template(
             "mcqs.html",
@@ -467,6 +484,50 @@ def download_flashcards():
             y = 800
 
     c.save()
+
+    return send_file(
+        pdf_file,
+        as_attachment=True
+    )
+
+@app.route("/download_mcqs")
+def download_mcqs():
+
+    pdf_file = "mcqs.pdf"
+    pdf = SimpleDocTemplate(pdf_file)
+    styles = getSampleStyleSheet()
+    content = []
+
+    content.append(
+        Paragraph(
+            "AI Study Assistant - MCQ Report",
+            styles["Title"]
+        )
+    )
+
+    content.append(Spacer(1, 20))
+
+    for mcq in latest_mcqs:
+
+        content.append(
+            Paragraph(
+                mcq["question"].replace("\n", "<br/>"),
+                styles["BodyText"]
+            )
+        )
+
+        content.append(
+            Paragraph(
+                f"<b>Correct Answer:</b> {mcq['answer']}",
+                styles["BodyText"]
+            )
+        )
+
+        content.append(
+            Spacer(1, 15)
+        )
+
+    pdf.build(content)
 
     return send_file(
         pdf_file,

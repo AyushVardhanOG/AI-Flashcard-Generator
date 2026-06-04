@@ -13,12 +13,12 @@
     <h1>📝 MCQ Practice</h1>
 
     <a href="/download_mcqs">
-    <button>
-        📄 Download MCQ PDF
-    </button>
-</a>
+        <button>
+            📄 Download MCQ PDF
+        </button>
+    </a>
 
-<br><br>
+    <br><br>
 
     <p>
         Try solving first, then reveal the answer.
@@ -26,17 +26,33 @@
 
     {% for mcq in mcqs %}
 
-    <div class="card">
+    <div class="card mcq-card">
 
-        <pre>{{ mcq.question }}</pre>
+        <h2 class="mcq-question">
+            {{ mcq.question.split('\n')[0] }}
+        </h2>
 
-        <details>
+        <div class="mcq-options">
 
-            <summary>Show Answer</summary>
+            {% for line in mcq.question.split('\n')[1:] %}
+
+                {% if line.strip() %}
+                    <div class="option-box">
+                        {{ line }}
+                    </div>
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+
+        <details class="answer-box">
+
+            <summary>▼ Show Answer</summary>
 
             <p>
-                Correct Answer:
-                {{ mcq.answer }}
+                ✅ Correct Answer:
+                <strong>{{ mcq.answer }}</strong>
             </p>
 
         </details>

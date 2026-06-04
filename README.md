@@ -1,3 +1,17 @@
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:38bdf8,100:22c55e&height=250&section=header&text=AI%20Study%20Assistant&fontSize=50&fontColor=ffffff&animation=fadeIn&fontAlignY=40&desc=Flashcards%20•%20MCQs%20•%20Quiz%20Mode&descAlignY=60"/>
+</p>
+<p align="center">
+
+<img src="https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python">
+
+<img src="https://img.shields.io/badge/Flask-Web_App-black?style=for-the-badge&logo=flask">
+
+<img src="https://img.shields.io/badge/Gemini-AI-green?style=for-the-badge">
+
+<img src="https://img.shields.io/badge/Status-Live-success?style=for-the-badge">
+
+</p>
 # 📚 AI Study Assistant
 
 An AI-powered learning platform that converts PDF notes into:

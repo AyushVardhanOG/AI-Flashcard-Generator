@@ -1,31 +1,88 @@
-# AI Study Assistant
+# 📚 AI Study Assistant
 
-AI-powered study assistant that converts PDF notes into:
+An AI-powered learning platform that transforms PDF notes into:
 
-- Flashcards
-- Multiple Choice Questions (MCQs)
-- Interactive Quizzes
-- Quiz Score Reports
-- PDF Exports
+* 📚 Flashcards
+* 📝 MCQs
+* 🎯 Interactive Quizzes
+* 📄 PDF Reports
 
-## Tech Stack
+Built using Python, Flask and Generative AI.
 
-- Python
-- Flask
-- Google Gemini API
-- HTML/CSS
-- Render
+---
 
-## Features
-
-✔ PDF Upload
-✔ AI Flashcard Generation
-✔ AI MCQ Generation
-✔ Interactive Quiz
-✔ Quiz Scoring
-✔ Flashcard PDF Download
-✔ Quiz Report PDF Download
-
-## Live Demo
+## 🚀 Live Demo
 
 https://ai-study-generator.onrender.com
+
+---
+
+## ✨ Features
+
+### 📚 Flashcard Generator
+
+Upload study notes and instantly generate flashcards.
+
+### 📝 MCQ Generator
+
+Generate AI-powered multiple choice questions.
+
+### 🎯 Quiz Mode
+
+Test your understanding with interactive quizzes and score tracking.
+
+### 📄 PDF Export
+
+Download generated MCQs and quiz reports as PDF files.
+
+### 🌐 Online Deployment
+
+Hosted on Render and accessible from anywhere.
+
+---
+
+## 🛠️ Tech Stack
+
+* Python
+* Flask
+* HTML
+* CSS
+* ReportLab
+* Google Gemini AI
+
+---
+
+## 📸 Screenshots
+
+(Add screenshots here later)
+
+---
+
+## 👨‍💻 Developer
+
+Ayush Vardhan Singh
+
+GitHub:
+https://github.com/AyushVardhanOG
+
+LinkedIn:
+https://www.linkedin.com/in/ayush-vardhan-singh/
+
+---
+
+## 📈 Project Statistics
+
+* 3 Study Modes
+* PDF Export Support
+* AI Powered Learning
+* Responsive UI
+* Live Deployment
+
+---
+
+## ⭐ Future Improvements
+
+* Image Upload Support
+* User Accounts
+* Study Progress Tracking
+* Advanced Analytics

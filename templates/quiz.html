@@ -18,11 +18,13 @@
 
         <div class="card">
 
-            <pre>{{ question.question }}</pre>
+            <h2 class="quiz-question">
+                {{ question.question }}
+            </h2>
 
             {% for option in question.options %}
 
-            <label>
+            <label class="option-box">
 
                 <input
                     type="radio"
@@ -33,8 +35,6 @@
                 {{ option }}
 
             </label>
-
-            <br><br>
 
             {% endfor %}
 

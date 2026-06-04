@@ -383,13 +383,39 @@ def download_results():
 
     for result in latest_results:
 
-        c.drawString(
-            50,
-            y,
-            f"Question: {result['question'][:80]}"
-        )
+        question_text = f"Question: {result['question']}"
 
-        y -= 20
+        words = question_text.split()
+
+        line = ""
+
+        for word in words:
+
+            if len(line + word) < 80:
+
+                line += word + " "
+
+            else:
+
+                c.drawString(
+                    50,
+                    y,
+                    line
+                )
+
+                y -= 20
+
+                line = word + " "
+
+        if line:
+
+            c.drawString(
+                50,
+                y,
+                line
+            )
+
+            y -= 20
 
         c.drawString(
             70,

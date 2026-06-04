@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>AI Study Assistant</title>
+
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -11,8 +12,14 @@
 
     <h1>📚 AI Study Assistant</h1>
 
+<div class="badge">
+    AI Powered Learning Tool
+</div>
+    <h3>by Ayush Vardhan Singh</h3>
+
     <p>
-        Upload your notes and let AI generate Flashcards or MCQs.
+        Transform PDF notes into Flashcards,
+        MCQs and Interactive Quizzes using AI.
     </p>
 
     <form action="/upload"
@@ -31,7 +38,7 @@
                    name="mode"
                    value="flashcards"
                    checked>
-            Generate Flashcards
+            📚 Flashcards
         </label>
 
         <br><br>
@@ -40,23 +47,77 @@
             <input type="radio"
                    name="mode"
                    value="mcqs">
-            Generate MCQs
+            📝 MCQs
         </label>
 
         <br><br>
 
         <label>
             <input type="radio"
-                 name="mode"
-                value="quiz">
-            Quiz Mode
+                   name="mode"
+                   value="quiz">
+            🎯 Quiz Mode
         </label>
 
+        <br><br>
+
         <button type="submit">
-            Generate
+            Generate with AI
         </button>
 
     </form>
+
+    <br><br>
+
+    <div class="features">
+
+        <div class="card">
+            <h3>📚 Flashcards</h3>
+            <p>Generate study cards instantly.</p>
+        </div>
+
+        <div class="card">
+            <h3>📝 MCQs</h3>
+            <p>Practice AI-generated questions.</p>
+        </div>
+
+        <div class="card">
+            <h3>🎯 Quiz Mode</h3>
+            <p>Test yourself and get scores.</p>
+        </div>
+
+        <div class="card">
+            <h3>📄 PDF Export</h3>
+            <p>Download reports anytime.</p>
+        </div>
+
+    </div>
+
+    <br>
+
+    <footer>
+
+        <p>
+            Built by Ayush Vardhan Singh
+        </p>
+
+        <p>
+
+            <a href="https://github.com/AyushVardhanOG"
+               target="_blank">
+               GitHub
+            </a>
+
+            |
+
+            <a href="https://www.linkedin.com/in/ayush-vardhan-singh/"
+               target="_blank">
+               LinkedIn
+            </a>
+
+        </p>
+
+    </footer>
 
 </div>
 

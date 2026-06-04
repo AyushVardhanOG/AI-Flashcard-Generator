@@ -1,60 +1,99 @@
 # 📚 AI Study Assistant
 
-An AI-powered learning platform that transforms PDF notes into:
+An AI-powered learning platform that converts PDF notes into:
 
-* 📚 Flashcards
-* 📝 MCQs
-* 🎯 Interactive Quizzes
-* 📄 PDF Reports
+- 📚 Flashcards
+- 📝 MCQs
+- 🎯 Interactive Quizzes
+- 📄 Downloadable PDF Reports
 
-Built using Python, Flask and Generative AI.
-
----
-
-## 🚀 Live Demo
-
-https://ai-study-generator.onrender.com
+Built using Flask, Python and Gemini AI.
 
 ---
 
-## ✨ Features
+## 🚀 Features
 
-### 📚 Flashcard Generator
+✅ Upload PDF Notes
 
-Upload study notes and instantly generate flashcards.
+✅ Generate Flashcards Instantly
 
-### 📝 MCQ Generator
+✅ Generate MCQ Practice Sets
 
-Generate AI-powered multiple choice questions.
+✅ Interactive Quiz Mode
 
-### 🎯 Quiz Mode
+✅ Quiz Score Evaluation
 
-Test your understanding with interactive quizzes and score tracking.
+✅ PDF Export Support
 
-### 📄 PDF Export
+✅ Beautiful Modern UI
 
-Download generated MCQs and quiz reports as PDF files.
-
-### 🌐 Online Deployment
-
-Hosted on Render and accessible from anywhere.
+✅ Responsive Design
 
 ---
 
 ## 🛠️ Tech Stack
 
-* Python
-* Flask
-* HTML
-* CSS
-* ReportLab
-* Google Gemini AI
+- Python
+- Flask
+- HTML
+- CSS
+- Gemini AI API
+- ReportLab
+- PyPDF2
 
 ---
 
 ## 📸 Screenshots
 
-(Add screenshots here later)
+### Homepage
+
+![Homepage](Screenshots/homepage.png)
+
+### Flashcards
+
+![Flashcards](Screenshots/Flashcards.png)
+
+### MCQ Practice
+
+![MCQ](Screenshots/Mcq.png)
+
+### Quiz Mode
+
+![Quiz](Screenshots/quiz.png)
+
+---
+
+## ⚙️ Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/AyushVardhanOG/AI-Study-Assistant.git
+```
+
+Go inside the project
+
+```bash
+cd AI-Study-Assistant
+```
+
+Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+Run application
+
+```bash
+python app.py
+```
+
+---
+
+## 🌐 Live Demo
+
+https://ai-study-generator.onrender.com
 
 ---
 
@@ -69,20 +108,3 @@ LinkedIn:
 https://www.linkedin.com/in/ayush-vardhan-singh/
 
 ---
-
-## 📈 Project Statistics
-
-* 3 Study Modes
-* PDF Export Support
-* AI Powered Learning
-* Responsive UI
-* Live Deployment
-
----
-
-## ⭐ Future Improvements
-
-* Image Upload Support
-* User Accounts
-* Study Progress Tracking
-* Advanced Analytics
